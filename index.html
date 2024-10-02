@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skan Hous - Linktree</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background-image: url('imagens/logo.png'); /* Substitua pelo caminho da sua logo */
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            margin: 10px 0;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #ffce04;
+            color: #000;
+        }
+
+        .video-dropdown {
+            display: none;
+            margin: 15px 0;
+        }
+
+        .video-dropdown video {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+            }
+
+            .button {
+                font-size: 16px;
+                padding: 12px 0;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Ícones de redes sociais */
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: #000;
+            font-size: 24px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ffce04;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo"></div>
+        <h1>Bem Vindo a Skan Hous</h1>
+        <a href="#" class="button">Website</a>
+        <a href="#" class="button">Instagram</a>
+        <a href="#" class="button">LinkedIn</a>
+        <a href="#" class="button">Agendar Reunião</a>
+        <button class="button" id="videoButton">Vídeo</button>
+        <div class="video-dropdown" id="videoDropdown">
+            <video controls autoplay muted>
+                <source src="videos/video.mp4" type="video/mp4"> <!-- Substitua pelo caminho correto -->
+                Seu navegador não suporta a reprodução de vídeo.
+            </video>
+        </div>
+        <a href="#" class="button">WhatsApp</a>
+        
+        <!-- Ícones de redes sociais -->
+        <div class="social-icons">
+            <a href="mailto:email@example.com" target="_blank" title="E-mail">
+                <img src="imagens/email-icon.png" alt="E-mail" width="30">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" title="Instagram">
+                <img src="imagens/instagram-icon.png" alt="Instagram" width="30">
+            </a>
+            <a href="https://wa.me/seunumerodetelefone" target="_blank" title="WhatsApp">
+                <img src="imagens/whatsapp-icon.png" alt="WhatsApp" width="30">
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">
+                <img src="imagens/linkedin-icon.png" alt="LinkedIn" width="30">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const videoButton = document.getElementById('videoButton');
+        const videoDropdown = document.getElementById('videoDropdown');
+
+        videoButton.addEventListener('click', () => {
+            if (videoDropdown.style.display === 'none' || videoDropdown.style.display === '') {
+                videoDropdown.style.display = 'block';
+            } else {
+                videoDropdown.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
