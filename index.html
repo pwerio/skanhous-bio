@@ -1,423 +1,317 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skan Hous - Linktree</title>
+    <title>Bio Skan Hous</title>
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: white;
         }
 
         .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
             text-align: center;
-            max-width: 400px;
-            width: 100%;
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            background-image: url('imagens/logo.png');
-            background-size: cover;
-            background-position: center;
+            margin: 20px 0;
         }
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .button {
+        .link-btn {
             display: block;
             width: 100%;
-            padding: 15px 0;
+            padding: 15px;
             margin: 10px 0;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background-color: #ffce04;
-            color: #000;
-        }
-
-        .button.selected {
-            background-color: #ffce04;
-            color: #000;
-        }
-
-        /* Botões do agendamento */
-        .datetime-field, .time-dropdown, .input-field {
-            display: block;
-            width: 100%;
-            padding: 15px 0;
-            margin: 10px 0;
-            background-color: #fff;
-            color: #000;
-            border: 2px solid #000;
-            border-radius: 8px;
-            font-size: 18px;
-            text-align: center;
-        }
-
-        .confirm-button {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            padding: 15px 0;
-            border-radius: 8px;
-            font-size: 18px;
-            transition: background-color 0.3s;
-            display: none; /* Inicialmente oculto */
-        }
-
-        .confirm-button:disabled {
-            background-color: #6c757d;
-        }
-
-        .confirm-button:hover:not(:disabled) {
-            background-color: #218838;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .container {
-                max-width: 90%;
-            }
-
-            .button {
-                font-size: 16px;
-                padding: 12px 0;
-            }
-
-            .logo {
-                width: 80px;
-                height: 80px;
-            }
-        }
-
-        /* Ícones de redes sociais */
-        .social-icons {
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            margin: 0 10px;
-            color: #000;
-            font-size: 24px;
+            background-color: black;
+            color: white;
             text-decoration: none;
-            transition: color 0.3s;
+            text-align: center;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
-        .social-icons a:hover {
-            color: #ffce04;
+        .link-btn:hover {
+            background-color: #ffc304;
+            color: black;
         }
 
-        /* Estilo para o campo de agradecimento */
+        .dropdown-content {
+            display: none;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .dropdown-content.active {
+            display: block;
+        }
+
+        .dropdown-content button, .dropdown-content input, .dropdown-content select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .submit-btn {
+            background-color: gray;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .submit-btn.active {
+            background-color: green;
+            cursor: pointer;
+        }
+
+        /* YouTube carousel styling */
+        .carousel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .carousel video {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .thumbnails {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .thumbnails video {
+            width: 30%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Thank you message styling */
         .thank-you-message {
+            color: black;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 15px;
             display: none;
-            margin-top: 20px;
-            color: #28a745;
-            font-size: 18px;
         }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #000;
-        }
-
-        /* Estilo do vídeo */
-        .video-dropdown {
-            display: none;
-            width: 100%;
-        }
-
-        video {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        /* Estilo para mensagens de erro */
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .input-error {
+        /* Red input styling for invalid fields */
+        .invalid {
             color: red;
         }
+
+        /* Black input styling for valid fields */
+        .valid {
+            color: black;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo"></div>
-        <h1>Bem Vindo a Skan Hous</h1>
-        <a href="#" class="button">Website</a>
-        <a href="#" class="button">Instagram</a>
-        <a href="#" class="button">LinkedIn</a>
-        <button class="button" id="schedulePresentationButton">Agendar Apresentação</button>
+        <img src="logo.png" alt="Skan Hous Logo" class="logo">
 
-        <!-- Seção de datas e horários -->
-        <div class="date-time-container" id="dateTimeContainer" style="display: none;">
-            <label for="dateField">Escolha a Data:</label>
-            <select id="dateField" class="datetime-field"></select>
+        <!-- Links Section -->
+        <a href="https://wa.me/1234567890" class="link-btn">WhatsApp</a>
+        <a href="https://www.skanhous.com.br" class="link-btn">Website</a>
+        <a href="https://www.instagram.com/skanhous" class="link-btn">Instagram</a>
+        <a href="https://www.linkedin.com/company/skanhous" class="link-btn">LinkedIn</a>
 
-            <label for="timeField">Escolha o Horário:</label>
-            <select id="timeField" class="time-dropdown"></select>
+        <!-- Agendar Apresentação Dropdown -->
+        <a href="#" class="link-btn" id="agendar-btn">Agendar Apresentação</a>
+        <div id="agendar-dropdown" class="dropdown-content">
+            <!-- Escolha de Data -->
+            <label for="date-select">Escolha a data:</label>
+            <select id="date-select">
+                <!-- JavaScript will populate dates here -->
+            </select>
 
-            <div id="inputFields" style="display: none;">
-                <input type="text" id="nameField" class="input-field" placeholder="Nome" required />
-                <input type="email" id="emailField" class="input-field" placeholder="E-mail" required />
-                <div class="error-message" id="emailError" style="display: none;"></div>
-                <input type="text" id="phoneField" class="input-field" placeholder="Telefone (xx) xxxxx-xxxx" required />
-                <div class="error-message" id="phoneError" style="display: none;"></div>
+            <!-- Escolha do Horário -->
+            <label for="time-select">Escolha o horário:</label>
+            <select id="time-select">
+                <!-- JavaScript will populate time options here -->
+            </select>
+
+            <!-- Nome Completo -->
+            <input type="text" id="full-name" placeholder="Nome Completo" class="invalid">
+
+            <!-- E-mail -->
+            <input type="email" id="email" placeholder="Email" class="invalid">
+
+            <!-- Celular -->
+            <input type="tel" id="phone" placeholder="Celular (xx) xxxxx-xxxx" class="invalid">
+
+            <!-- Submit Button -->
+            <button id="submit-btn" class="submit-btn" disabled>Enviar</button>
+
+            <!-- Thank you message -->
+            <div id="thank-you-message" class="thank-you-message">
+                Obrigado por agendar sua apresentação com a Skan Hous. Em breve receberá a confirmação.
             </div>
         </div>
 
-        <!-- Botão de confirmação -->
-        <button class="confirm-button" id="confirmButton" disabled>Confirmar Reunião</button>
+        <!-- Carrossel de Vídeos -->
+        <a href="#" class="link-btn" id="videos-btn">Carrossel de Videos</a>
+        <div id="videos-dropdown" class="dropdown-content">
+            <div class="carousel">
+                <!-- Main large video -->
+                <video src="video1.mp4" controls></video>
 
-        <!-- Vídeo Dropdown -->
-        <button class="button" id="videoButton">Vídeo</button>
-        <div class="video-dropdown" id="videoDropdown">
-            <video controls autoplay muted>
-                <source src="videos/video.mp4" type="video/mp4">
-                Seu navegador não suporta a reprodução de vídeo.
-            </video>
+                <!-- Smaller thumbnails below -->
+                <div class="thumbnails">
+                    <video src="video2.mp4" controls></video>
+                    <video src="video3.mp4" controls></video>
+                    <video src="video4.mp4" controls></video>
+                </div>
+            </div>
         </div>
-
-        <div class="thank-you-message" id="thankYouMessage">
-            Obrigado por agendar sua reunião com o time da Skan Hous. Em breve você vai receber um e-mail confirmando o agendamento. Time Skan Hous.
-        </div>
-
-        <!-- Ícones de redes sociais -->
-        <div class="social-icons">
-            <a href="mailto:email@example.com" target="_blank" title="E-mail">
-                <img src="imagens/mail-sharp.png" alt="E-mail" width="30">
-            </a>
-            <a href="https://www.instagram.com" target="_blank" title="Instagram">
-                <img src="imagens/logo-instagram.png" alt="Instagram" width="30">
-            </a>
-            <a href="https://wa.me/seunumerodetelefone" target="_blank" title="WhatsApp">
-                <img src="imagens/logo-whatsapp.png" alt="WhatsApp" width="30">
-            </a>
-            <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">
-                <img src="imagens/logo-linkedin.png" alt="LinkedIn" width="30">
-            </a>
-        </div>
-        
-        <div class="footer">Skan Hous - Todos os direitos reservados - 2024</div>
     </div>
 
     <script>
-        const videoButton = document.getElementById('videoButton');
-        const videoDropdown = document.getElementById('videoDropdown');
-        const schedulePresentationButton = document.getElementById('schedulePresentationButton');
-        const dateTimeContainer = document.getElementById('dateTimeContainer');
-        const dateField = document.getElementById('dateField');
-        const timeField = document.getElementById('timeField');
-        const inputFields = document.getElementById('inputFields');
-        const confirmButton = document.getElementById('confirmButton');
-        const thankYouMessage = document.getElementById('thankYouMessage');
-        const nameField = document.getElementById('nameField');
-        const emailField = document.getElementById('emailField');
-        const phoneField = document.getElementById('phoneField');
-        const emailError = document.getElementById('emailError');
-        const phoneError = document.getElementById('phoneError');
-
-        videoButton.addEventListener('click', () => {
-            videoDropdown.style.display = videoDropdown.style.display === 'none' || videoDropdown.style.display === '' ? 'block' : 'none';
+        // Agendar Apresentação Dropdown
+        document.getElementById('agendar-btn').addEventListener('click', function() {
+            document.getElementById('agendar-dropdown').classList.toggle('active');
         });
 
-        schedulePresentationButton.addEventListener('click', () => {
-            dateTimeContainer.style.display = 'block';
-            generateAvailableDates();
+        // Carrossel de Videos Dropdown
+        document.getElementById('videos-btn').addEventListener('click', function() {
+            document.getElementById('videos-dropdown').classList.toggle('active');
         });
 
-        dateField.addEventListener('change', () => {
-            const selectedDate = dateField.value;
-            const selectedTime = timeField.value;
+        // Gerar opções de data (dias úteis) com formato dia da semana / dia / mês / ano
+        function generateDates() {
+            const dateSelect = document.getElementById('date-select');
+            const currentDate = new Date();
+            const weekDays = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            let businessDaysCount = 0;
 
-            inputFields.style.display = 'block';
-
-            // Habilitar botão de confirmação apenas se todos os campos estão preenchidos
-            confirmButton.style.display = selectedDate && selectedTime && nameField.value && emailField.value && phoneField.value ? 'block' : 'none';
-            confirmButton.disabled = !confirmButton.style.display; // Habilitar ou desabilitar o botão
-        });
-
-        timeField.addEventListener('change', () => {
-            const selectedDate = dateField.value;
-            const selectedTime = timeField.value;
-
-            inputFields.style.display = 'block';
-
-            // Habilitar botão de confirmação apenas se todos os campos estão preenchidos
-            confirmButton.style.display = selectedDate && selectedTime && nameField.value && emailField.value && phoneField.value ? 'block' : 'none';
-            confirmButton.disabled = !confirmButton.style.display; // Habilitar ou desabilitar o botão
-        });
-
-        nameField.addEventListener('input', updateConfirmButton);
-        emailField.addEventListener('input', updateConfirmButton);
-        phoneField.addEventListener('input', updateConfirmButton);
-
-        function updateConfirmButton() {
-            const selectedDate = dateField.value;
-            const selectedTime = timeField.value;
-            const isEmailValid = validateEmail(emailField.value);
-            const isPhoneValid = validatePhone(phoneField.value);
-
-            // Mostrar mensagens de erro
-            emailError.style.display = isEmailValid ? 'none' : 'block';
-            phoneError.style.display = isPhoneValid ? 'none' : 'block';
-
-            // Atualiza a cor dos campos de erro
-            emailField.classList.toggle('input-error', !isEmailValid);
-            phoneField.classList.toggle('input-error', !isPhoneValid);
-
-            // Atualiza a cor do texto dos campos de erro
-            emailField.style.color = isEmailValid ? '#000' : 'red'; // Trocar cor do texto
-            phoneField.style.color = isPhoneValid ? '#000' : 'red'; // Trocar cor do texto
-
-            // Habilitar botão de confirmação apenas se todos os campos estão preenchidos
-            confirmButton.style.display = selectedDate && selectedTime && nameField.value && emailField.value && phoneField.value && isEmailValid && isPhoneValid ? 'block' : 'none';
-            confirmButton.disabled = !confirmButton.style.display; // Habilitar ou desabilitar o botão
-        }
-
-        confirmButton.addEventListener('click', () => {
-            if (confirmButton.disabled) return;
-
-            // Mostrar mensagem de agradecimento
-            thankYouMessage.style.display = 'block';
-
-            // Tornar o botão cinza e inativo
-            confirmButton.style.backgroundColor = '#6c757d'; // Cor cinza
-            confirmButton.disabled = true;
-
-            // Ocultar campos de data e horário
-            dateTimeContainer.style.display = 'none';
-            inputFields.style.display = 'none';
-
-            // Redefinir campos após 5 segundos
-            resetFields();
-        });
-
-        function resetFields() {
-            dateField.value = '';
-            timeField.value = '';
-            nameField.value = '';
-            emailField.value = '';
-            phoneField.value = '';
-            confirmButton.style.display = 'none';
-            confirmButton.disabled = true;
-
-            // Limpar mensagens de erro
-            emailError.style.display = 'none';
-            phoneError.style.display = 'none';
-
-            // Retornar ao estado original após 5 segundos
-            setTimeout(() => {
-                thankYouMessage.style.display = 'none'; // Ocultar mensagem
-                resetDropdown(); // Resetar dropdowns
-            }, 5000);
-        }
-
-        function resetDropdown() {
-            dateField.innerHTML = '';
-            timeField.innerHTML = '';
-            emailField.classList.remove('input-error');
-            phoneField.classList.remove('input-error');
-            emailField.style.color = '#000'; // Cor original
-            phoneField.style.color = '#000'; // Cor original;
-            confirmButton.style.backgroundColor = '#28a745'; // Retornar a cor original
-            confirmButton.disabled = false; // Reabilitar botão
-            confirmButton.style.display = 'none'; // Manter botão oculto
-        }
-
-        function generateAvailableDates() {
-            const today = new Date();
-            const weekdays = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
-            let availableDays = 0;
-
-            for (let i = 1; availableDays < 5; i++) {
-                const date = new Date(today);
-                date.setDate(today.getDate() + i);
-
-                if (date.getDay() === 0) continue; // Ignora domingos
-                const dayName = weekdays[date.getDay()];
-                const option = document.createElement('option');
-                option.value = date.toISOString().split('T')[0];
-                option.textContent = `${dayName} - ${date.toLocaleDateString('pt-BR')}`; // Formata a data
-                dateField.appendChild(option);
-                availableDays++;
-            }
-
-            for (let hour = 9; hour < 19; hour++) {
-                for (let minute = 0; minute < 60; minute += 30) {
-                    const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-                    const option = document.createElement('option');
-                    option.value = time;
-                    option.textContent = time;
-                    timeField.appendChild(option);
+            while (businessDaysCount < 5) {
+                currentDate.setDate(currentDate.getDate() + 1);
+                const day = currentDate.getDay();
+                if (day !== 0) { // Ignora domingos
+                    const dayOfWeek = weekDays[day];
+                    const formattedDate = `${dayOfWeek} / ${currentDate.getDate()} / ${currentDate.getMonth() + 1} / ${currentDate.getFullYear()}`;
+                    const dateOption = document.createElement('option');
+                    dateOption.value = formattedDate;
+                    dateOption.text = formattedDate;
+                    dateSelect.appendChild(dateOption);
+                    businessDaysCount++;
                 }
             }
         }
+        generateDates();
 
-        // Validação de e-mail
-        function validateEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
-        }
+        // Gerar opções de horário
+        function generateTimes() {
+            const timeSelect = document.getElementById('time-select');
+            const times = [];
+            const weekHours = { start: 9, end: 19 };
+            const satHours = { start: 9, end: 13 };
 
-        // Validação de telefone
-        function validatePhone(phone) {
-            const regex = /^\(\d{2}\) \d{5}-\d{4}$/;
-            return regex.test(phone);
-        }
-
-        // Máscara para o telefone
-        phoneField.addEventListener('input', () => {
-            let value = phoneField.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-            if (value.length > 11) value = value.slice(0, 11); // Limita a 11 dígitos
-            if (value.length >= 7) {
-                value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
-            } else if (value.length >= 2) {
-                value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-            } else if (value.length >= 1) {
-                value = `(${value.slice(0, 2)}`;
+            for (let i = weekHours.start; i <= weekHours.end; i++) {
+                times.push(`${i}:00`, `${i}:30`);
             }
-            phoneField.value = value;
 
-            // Atualiza o botão de confirmação
-            updateConfirmButton();
+            times.forEach(time => {
+                const option = document.createElement('option');
+                option.value = time;
+                option.text = time;
+                timeSelect.appendChild(option);
+            });
+        }
+        generateTimes();
+
+        // Máscara de Celular
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function(e) {
+            let x = phoneInput.value.replace(/\D/g, '');
+            if (x.length > 10) {
+                x = x.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+            } else if (x.length > 5) {
+                x = x.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+            } else if (x.length > 2) {
+                x = x.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+            } else {
+                x = x.replace(/^(\d*)$/, '($1');
+            }
+            phoneInput.value = x;
+            validateInputs();
         });
 
-        emailField.addEventListener('input', () => {
-            emailField.style.color = validateEmail(emailField.value) ? '#000' : 'red'; // Trocar cor do texto
-            updateConfirmButton();
+        // Validação de Formulário
+        const submitBtn = document.getElementById('submit-btn');
+        const inputs = [document.getElementById('full-name'), document.getElementById('email'), document.getElementById('phone')];
+
+        function validateInputs() {
+            let allFilled = true;
+
+            inputs.forEach(input => {
+                if (input.value.trim() === '') {
+                    input.classList.add('invalid');
+                    input.classList.remove('valid');
+                    allFilled = false;
+                } else if (input.checkValidity()) {
+                    input.classList.remove('invalid');
+                    input.classList.add('valid');
+                } else {
+                    input.classList.remove('valid');
+                    input.classList.add('invalid');
+                }
+            });
+
+            // Validar telefone
+            if (phoneInput.value.length === 15) {
+                phoneInput.classList.remove('invalid');
+                phoneInput.classList.add('valid');
+            } else {
+                phoneInput.classList.remove('valid');
+                phoneInput.classList.add('invalid');
+            }
+
+            // Ativar ou desativar o botão
+            if (allFilled && phoneInput.value.length === 15) {
+                submitBtn.classList.add('active');
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.classList.remove('active');
+                submitBtn.disabled = true;
+            }
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', validateInputs);
+        });
+
+        // Envio do formulário
+        submitBtn.addEventListener('click', function() {
+            document.getElementById('thank-you-message').style.display = 'block';
+            submitBtn.disabled = true; // Desabilita o botão de envio
+
+            // Limpa os campos do formulário
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('valid');
+                input.classList.remove('invalid');
+            });
+            phoneInput.value = ''; // Limpa o campo do telefone
+
+            // Exibe a mensagem e recolhe o dropdown após 5 segundos
+            setTimeout(function() {
+                document.getElementById('thank-you-message').style.display = 'none';
+                document.getElementById('agendar-dropdown').classList.remove('active');
+                submitBtn.disabled = false; // Reabilita o botão de envio
+            }, 5000);
         });
     </script>
 </body>
